@@ -2,28 +2,30 @@ package edu.ait.hospitalmanagement.dto;
 
 import java.sql.Date;
 
-public class User {
+public class HospitalUser {
     private String id;
     private String firstName;
     private String lastName;
     private Date dob;
     private int age;
+    private String country;
+    private String mobileNumber;
     private String emailId;
     private String password;
-    private String country;
 
-    public User() {
+    public HospitalUser() {
     }
 
-    public User(String id, String firstName, String lastName, Date dob, int age, String emailId, String password, String country) {
+    public HospitalUser(String id, String firstName, String lastName, Date dob, int age, String country, String mobileNumber, String emailId, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
         this.age = age;
+        this.country = country;
+        this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.password = password;
-        this.country = country;
     }
 
     public String getId() {
@@ -66,6 +68,22 @@ public class User {
         this.age = age;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     public String getEmailId() {
         return emailId;
     }
@@ -82,25 +100,18 @@ public class User {
         this.password = password;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "HospitalUser{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
                 ", age=" + age +
+                ", country='" + country + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
-                ", country='" + country + '\'' +
                 '}';
     }
 }
