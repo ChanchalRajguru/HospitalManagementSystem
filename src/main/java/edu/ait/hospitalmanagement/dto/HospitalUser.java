@@ -114,4 +114,8 @@ public class HospitalUser {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public String createUser(){
+        return "";
+    }
 }
