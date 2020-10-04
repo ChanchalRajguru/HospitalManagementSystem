@@ -1,8 +1,10 @@
 package edu.ait.hospitalmanagement.dto;
 
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class loginManager {
 
-    public static void main(String[] args) {
-            
-    }
+
 }

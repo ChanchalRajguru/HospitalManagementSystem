@@ -1,9 +1,18 @@
 package edu.ait.hospitalmanagement.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
+@Entity
 public class Patient extends HospitalUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long emergencyId;
+
     private String address;
 
     public Patient(String id, String firstName, String lastName, Date dob, int age, String country, String mobileNumber, String emailId, String password, long emergencyId, String address) {
