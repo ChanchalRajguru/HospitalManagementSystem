@@ -1,25 +1,24 @@
 package edu.ait.hospitalmanagement.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
-public class Patient extends HospitalUser {
+@Table(name = "patient")
+public class Patient{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "emergency_Id")
     private long emergencyId;
 
     private String address;
 
-    public Patient(String id, String firstName, String lastName, Date dob, int age, String country, String mobileNumber, String emailId, String password, long emergencyId, String address) {
-        super(id, firstName, lastName, dob, age, country, mobileNumber, emailId, password);
-        this.emergencyId = emergencyId;
-        this.address = address;
-    }
+    @OneToOne(targetEntity = HospitalUser.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private List<HospitalUser> hospitalUsers;
+
 
     public long getEmergencyId() {
         return emergencyId;
@@ -37,15 +36,29 @@ public class Patient extends HospitalUser {
         this.address = address;
     }
 
+    public List<HospitalUser> getHospitalUsers() {
+        return hospitalUsers;
+    }
+
+    public void setHospitalUsers(List<HospitalUser> hospitalUsers) {
+        this.hospitalUsers = hospitalUsers;
+    }
+
+    public Patient() {
+    }
+
+    public Patient(long emergencyId, String address, List<HospitalUser> hospitalUsers) {
+        this.emergencyId = emergencyId;
+        this.address = address;
+        this.hospitalUsers = hospitalUsers;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
                 "emergencyId=" + emergencyId +
                 ", address='" + address + '\'' +
+                ", hospitalUsers=" + hospitalUsers +
                 '}';
-    }
-
-    public static void main(String[] args) {
-        HospitalUser hospitalUser = new HospitalUser();
     }
 }

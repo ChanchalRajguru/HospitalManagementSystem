@@ -1,38 +1,48 @@
 package edu.ait.hospitalmanagement.dto;
 
-import java.sql.Date;
 
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
+
+@Entity
+@Table(name="hospitaluser")
 public class HospitalUser {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name="first_name")
     private String firstName;
+
+    @Column(name= "last_name")
     private String lastName;
+
     private Date dob;
+
     private int age;
+
     private String country;
+
+    @Column(name = "mobile_number")
     private String mobileNumber;
+
+    @Column(name="email_id")
     private String emailId;
+
     private String password;
 
-    public HospitalUser() {
-    }
+    @OneToOne(targetEntity = Patient.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "emergency_Id")
+    private List<Patient> patient;
 
-    public HospitalUser(String id, String firstName, String lastName, Date dob, int age, String country, String mobileNumber, String emailId, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.age = age;
-        this.country = country;
-        this.mobileNumber = mobileNumber;
-        this.emailId = emailId;
-        this.password = password;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -100,10 +110,34 @@ public class HospitalUser {
         this.password = password;
     }
 
+    public List<Patient> getPatient() {
+        return patient;
+    }
+
+    public void setPatient(List<Patient> patient) {
+        this.patient = patient;
+    }
+
+    public HospitalUser() {
+    }
+
+    public HospitalUser(Integer id, String firstName, String lastName, Date dob, int age, String country, String mobileNumber, String emailId, String password, List<Patient> patient) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.age = age;
+        this.country = country;
+        this.mobileNumber = mobileNumber;
+        this.emailId = emailId;
+        this.password = password;
+        this.patient = patient;
+    }
+
     @Override
     public String toString() {
         return "HospitalUser{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dob=" + dob +
@@ -112,10 +146,7 @@ public class HospitalUser {
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
+                ", patient=" + patient +
                 '}';
-    }
-
-    public String createUser(){
-        return "";
     }
 }
